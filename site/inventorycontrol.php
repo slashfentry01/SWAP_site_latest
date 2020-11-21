@@ -57,7 +57,7 @@
                     <br>
 
                     <p class="text-white-50">
-                        Store Product:
+                        Store Product Name:
                     </p>
 
                     <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="product"  type="text" required>
@@ -80,7 +80,12 @@
                     </p>
                     <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="url"  type="url">
                     <br>
-                    <br>
+                        <p class="text-white-50">
+                            Seller Personal Contact:
+                        </p>
+                        <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="sellercontact"  type="number">
+
+                        <br>
                     <br>
                     <!-- <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1"> -->
                     <br>
