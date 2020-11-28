@@ -17,6 +17,21 @@ if (isset($_SESSION['email'] ) && $_SESSION['role'] == 'admin') {
 }
 //CHECK IF VALID USER
 //////////////////////////////////////////////////
+$mysql_host="localhost"; // Setup connection to database
+$mysql_user="root";
+$mysql_password="";
+$mysql_db="swapsite";
+
+$con = new mysqli($mysql_host,$mysql_user,$mysql_password,$mysql_db);
+if (!$con){
+    echo $con->errno ."<br>";
+    die('Could not connect: '. $con->error);
+}
+else {
+    echo "Connection to DB server at $mysql_host successful<br>"; //establish the connection to Dbase
+}
+error_reporting(E_PARSE);
+
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +103,52 @@ if (isset($_SESSION['email'] ) && $_SESSION['role'] == 'admin') {
                 <tbody> -->
                 <?php
                //place your code here
-                    echo"inventory";//remove before inserting code
+                $query="SELECT ITEM_ID, STORE_NAME, PRODUCT_NAME, PRODUCT_QUANTITY, PRODUCT_DESC, PRODUCT_URL, SELLER_CONTACT FROM inventory"; //sql query
+                $pQuery = $con->prepare($query); //Prepared statement
+                $result=$pQuery->execute(); //execute the prepared statement
+                $result=$pQuery->get_result(); //store the result of the query from prepared statement
+
+                $nrows=$result->num_rows; //store the number of rows from the results
+
+
+                if ($nrows>0) {
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<table class='table table-bordered table-dark>";  //Draw the table header
+                    echo "<tr>";
+                    echo "<th>ITEM_ID</th>";
+                    echo "<th>STORE_NAME</th>";
+                    echo "<th>PRODUCT_NAME</th>";
+                    echo "<th>PRODUCT_QUANTITY</th>";
+                    echo "<th>PRODUCT_DESC</th>";
+                    echo "<th>PRODUCT_URL</th>";
+                    echo "<th>SELLER_CONTACT</th>";
+
+                    echo "</tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>";
+                        echo $row['ITEM_ID'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['STORE_NAME'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['PRODUCT_NAME'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['PRODUCT_QUANTITY'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['PRODUCT_DESC'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['PRODUCT_URL'];
+                        echo "</td>";
+                        echo "<td>";
+                        echo $row['SELLER_CONTACT'];
+
+                    }}echo "</table>";
                 ?>
                 
             
